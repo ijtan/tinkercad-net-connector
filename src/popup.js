@@ -2,6 +2,7 @@ let button = document.getElementById('btnSet');
 let baseurl = document.getElementById('baseurl');
 let inputRefreshRate = document.getElementById('inputRefreshRate');
 let checkRawToAll = document.getElementById('checkRawToAll');
+let checkRequestForInputs = document.getElementById("requestForInputs");
 let checkRunning = document.getElementById('checkRunning');
 
 chrome.storage.local.get(['urlbase'], function(result) {                
@@ -16,6 +17,10 @@ chrome.storage.local.get(['rawtoall'], function(result) {
     if (result.rawtoall == null) result.rawtoall = true;
     checkRawToAll.checked = result.rawtoall;
 });
+chrome.storage.local.get(['requestForInputs'], function(result) {
+    if (result.requestForInputs == null) result.requestForInputs = false;
+    checkRequestForInputs.checked = result.requestForInputs;
+});
 chrome.storage.local.get(['running'], function(result) {
     if (result.running == null) result.running = true;
     checkRunning.checked = result.running;
@@ -29,6 +34,8 @@ function saveSettings() {
     chrome.storage.local.set({refreshrate: inputRefreshRate.value}, function() {        
     });
     chrome.storage.local.set({rawtoall: checkRawToAll.checked}, function() {        
+    });
+    chrome.storage.local.set({requestForInputs: checkRequestForInputs.checked}, function() {
     });
     chrome.storage.local.set({running: checkRunning.checked}, function() {        
     });
